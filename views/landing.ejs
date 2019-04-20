@@ -1,0 +1,264 @@
+<% include partials/header %>
+
+
+<h1>Landing Page!</h1>
+
+<p>Welcome to YelpCamp</p>
+
+<div id="mySidenav" class="sidenav" >
+<!--        <a class="closebtn" id="closeNav" >&times;</a>-->
+        <div class="container ">
+                <div class="calendar light">
+                    <div class="calendar_header">
+                        <h1 class = "header_title">Welcome Back</h1>
+                        <p class="header_copy"> Calendar Notes</p>
+                    </div>
+                    <div class="calendar_plan">
+                        <div class="cl_plan">
+                            <div class="cl_title">Name: </div>
+                            <div class="cl_copy">Number :  </div>
+                            <!-- <div class="cl_add">
+                              <i class="fas fa-plus"></i>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="calendar_events">
+                        <p class="ce_title">Upcoming Events</p>
+                          <% users.forEach(function(user){ %>
+                            <ol><%= user.username %></ol>
+                            <div class="event_item">
+                              <div class="ei_Dot dot_active"> </div>
+                                <div class="ei_Title">
+                                    <%= user.lastname %>
+                                </div>
+                                <div class="ei_Copy">
+                                  <%= user.email %>
+                                </div>
+                              </div>
+                          <% }); %>
+                        <form name="toDoList">
+                            <input type="text" name="ListItem"/>
+                        </form>
+
+                        <div id="button">Add</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<style>
+
+/*calender invitation*/
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0px auto;
+  margin-left: 0%;
+  width: 809px;
+}
+
+.light {
+  background-color: #fff;
+}
+
+.dark {
+  margin-left: 65px;
+}
+
+.calendar {
+  width: 370px;
+  box-shadow: 0px 0px 15px -16px rgba(0, 0, 0, 0.75);
+  font-family: 'Roboto', sans-serif;
+  padding: 20px 30px;
+  color: #363b41;
+  display: inline-block;
+}
+
+.calendar_header {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.header_copy {
+  color: #A39D9E;
+  font-size: 20px;
+}
+
+.calendar_plan {
+  margin: 20px 0 40px;
+}
+
+.cl_plan {
+  width: 100%;
+  height: 140px;
+  background-image: linear-gradient(-222deg, #FF8494, #ffa9b7);
+  box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  color: #fff;
+}
+
+.cl_copy {
+  font-size: 20px;
+  margin: 20px 0;
+  display: inline-block;
+}
+
+.cl_add {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+  margin: 0 0 0 65px;
+  color: #c2c2c2;
+  padding: 11px 13px;
+}
+
+.calendar_events {
+  color: #A39D9E;
+}
+
+.ce_title {
+  font-size: 14px;
+}
+
+.event_item {
+  margin: 18px 0;
+  padding: 5px;
+  cursor: pointer;
+}
+.event_item:hover {
+  background-image: linear-gradient(-222deg, #FF8494, #ffa9b7);
+  box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
+}
+.event_item:hover .ei_Dot {
+  background-color: #fff;
+}
+.event_item:hover .ei_Copy, .event_item:hover .ei_Title {
+  color: #fff;
+}
+
+.ei_Dot, .ei_Title {
+  display: inline-block;
+}
+
+.ei_Dot {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #A39D9E;
+  box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
+}
+
+.dot_active {
+  background-color: #FF8494;
+}
+
+.ei_Title {
+  margin-left: 10px;
+  color: #363b41;
+}
+
+.ei_Copy {
+  font-size: 12px;
+  margin-left: 27px;
+}
+
+.dark {
+  background-image: linear-gradient(-222deg, #646464, #454545);
+  color: #fff;
+}
+.dark .header_title, .dark .ei_Title, .dark .ce_title {
+  color: #fff;
+}
+
+#button{
+
+  color: #FFB6C1;
+}
+
+/*nav bar*/
+.sidenav {
+  height: 100%;
+  width: 30%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color: rgb(0,0,0);
+}
+</style>
+
+<a href="/campgrounds">View All Campgrounds</a>
+
+<script>
+//calender
+$(document).ready(
+    function(){
+        $('#button').click(
+            function(){
+                var toAdd = $('input[name=ListItem]').val();
+                $('ol').append('<div class="event_item"><div class="ei_Dot dot_active"></div><div class="ei_Title">'+toAdd+'</div><div class="ei_Copy">'+toAdd+'</div></div>');
+            });
+
+        $("input[name=ListItem]").keyup(function(event){
+            //enter
+            if(event.keyCode === 13){
+              console.log("enter");
+               // $("#button").click();
+            }
+        });
+
+        $(document).on('dblclick','li', function(){
+            $(this).toggleClass('strike').fadeOut('slow');
+        });
+
+        $('input').focus(function() {
+            $(this).val('');
+        });
+
+        $('ol').sortable();
+
+        //open nav bar
+
+        // $('#closeNav').click(
+        //     function(){
+        //         $("#mySidenav").css("width", "0");
+        //     });
+        //
+        // $('#openNav').click(
+        //     function(){
+        //         $("#mySidenav").css("width", "38%");
+        //     });
+
+    }
+);
+
+</script>
+
+<% include partials/footer %>
